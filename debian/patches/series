@@ -4,5 +4,6 @@
 30-typo_fix.patch
 40-umanaged-interfaces.patch
 50-bridge-interfaces.patch
+51-normalized-keys.patch
 82-core-handle-device-removal.patch
 83-dnsmasq-send-no-config-file-instead-of-a-bogus-one.patch
