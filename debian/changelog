@@ -1,4 +1,4 @@
-network-manager (0.8.1-6+squeeze1) UNRELEASED; urgency=low
+network-manager (0.8.1-6+squeeze1) stable; urgency=low
 
   * debian/patches/82-core-handle-device-removal.patch
     - Cherry-pick patch from upstream to correctly handle device removal when
@@ -15,7 +15,7 @@ network-manager (0.8.1-6+squeeze1) UNRELEASED; urgency=low
       hyphens or underscores, like e.g. bridge_ports and bridge-ports.
       (Closes: #609831)
 
- -- Michael Biebl <biebl@debian.org>  Sat, 22 Jan 2011 16:53:48 +0100
+ -- Michael Biebl <biebl@debian.org>  Fri, 11 Mar 2011 14:49:51 +0100
 
 network-manager (0.8.1-6) unstable; urgency=low
 
