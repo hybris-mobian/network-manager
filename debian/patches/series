@@ -4,3 +4,4 @@
 30-typo_fix.patch
 40-umanaged-interfaces.patch
 50-bridge-interfaces.patch
+82-core-handle-device-removal.patch
