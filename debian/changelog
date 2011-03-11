@@ -7,6 +7,9 @@ network-manager (0.8.1-6+squeeze1) UNRELEASED; urgency=low
     - Newer versions of dnsmasq validate the option parameters more strictly.
       Instead of passing a bogus file name simply use --conf-file without
       additional parameters. (Closes: #615082)
+  * debian/ifblacklist_migrate.sh
+    - Only comment out iface lines if we have an exact match for the network
+      interface. (Closes: #612247)
 
  -- Michael Biebl <biebl@debian.org>  Sat, 22 Jan 2011 16:53:48 +0100
 
