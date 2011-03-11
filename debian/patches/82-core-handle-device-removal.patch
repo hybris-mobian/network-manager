@@ -13,11 +13,11 @@ connected, unlike the interface name.
  src/nm-manager.c |    8 ++++++++
  1 files changed, 8 insertions(+), 0 deletions(-)
 
-diff --git a/src/nm-manager.c b/src/nm-manager.c
-index eb393fa..48f2173 100644
---- a/src/nm-manager.c
-+++ b/src/nm-manager.c
-@@ -2426,6 +2426,14 @@ udev_device_removed_cb (NMUdevManager *manager,
+Index: network-manager/src/nm-manager.c
+===================================================================
+--- network-manager.orig/src/nm-manager.c	2011-03-11 14:38:52.924832466 +0100
++++ network-manager/src/nm-manager.c	2011-03-11 14:49:20.272832466 +0100
+@@ -1842,6 +1842,14 @@
  
  	ifindex = g_udev_device_get_property_as_int (udev_device, "IFINDEX");
  	device = find_device_by_ifindex (self, ifindex);
@@ -30,8 +30,5 @@ index eb393fa..48f2173 100644
 +	}
 +
  	if (device)
- 		priv->devices = remove_one_device (self, priv->devices, device, FALSE);
+ 		priv->devices = remove_one_device (self, priv->devices, device, FALSE, TRUE);
  }
--- 
-1.7.2.3
-
