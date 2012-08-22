@@ -1,11 +1,11 @@
-network-manager (0.8.1-6+squeeze2) UNRELEASED; urgency=low
+network-manager (0.8.1-6+squeeze2) stable; urgency=low
 
   * debian/patches/84-CVE-2012-2736.patch
     - Disable Ad-Hoc WPA connections as the kernel is broken for Ad-Hoc WPA,
       and creates the connections as open connections instead.
     - Fixes CVE-2012-2736. (Closes: #655972)
 
- -- Michael Biebl <biebl@debian.org>  Wed, 22 Aug 2012 20:52:06 +0200
+ -- Michael Biebl <biebl@debian.org>  Wed, 22 Aug 2012 20:57:08 +0200
 
 network-manager (0.8.1-6+squeeze1) stable; urgency=low
 
