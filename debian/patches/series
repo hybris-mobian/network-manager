@@ -20,3 +20,4 @@ wifi-also-show-the-NM-D-Bus-path-for-the-Wi-Fi-AP-in-nm_w.patch
 device-separately-handle-NMDevice-s-autoconnect-by-user-a.patch
 device-add-get_autoconnect_allowed-virtual-function.patch
 device-wifi-block-autoconnect-while-scanning-is-in-progre.patch
+libnm-client-proxy-_enabled-and-metered-properties-to-the.patch
