@@ -1,3 +1,11 @@
+network-manager (1.6.2-3+deb9u1) stretch; urgency=medium
+
+  * libnm: Fix accessing enabled and metered properties.
+    Those properties were proxied to the wrong object leading to a crash of
+    clients using libnm. (Closes: #892998)
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 09 Oct 2018 00:40:45 +0200
+
 network-manager (1.6.2-3) unstable; urgency=medium
 
   * device/wifi: block autoconnect while scanning is in progress.
