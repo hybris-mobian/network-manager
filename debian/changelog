@@ -1,3 +1,71 @@
+network-manager (1.14.4-2) unstable; urgency=high
+
+  * dhcp6: Make sure we have enough space for the DHCP6 option header.
+    Fixes out-of-bounds heap write in systemd-networkd dhcpv6 option handling
+    which also affects the "internal" DHCP plugin of NetworkManager.
+    (CVE-2018-15688, LP: #1795921)
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 30 Oct 2018 09:34:25 +0100
+
+network-manager (1.14.4-1) unstable; urgency=medium
+
+  * New upstream version 1.14.4
+    - Fix a crash in ifupdown (Debian) configuration plugin (Closes: #911621)
+  * Switch to debhelper compat level 12 and dh_installsystemd
+  * Update symbols file for libnm0
+  * Ignore client/tests failures.
+    check-local-clients-tests-test-client appears to be flaky and prone to
+    fail on slower architectures. Ignore failures of this test until this
+    has been properly investigated.
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 25 Oct 2018 00:30:39 +0200
+
+network-manager (1.14.2-2) unstable; urgency=medium
+
+  * Upload to unstable
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 21 Oct 2018 16:09:49 +0200
+
+network-manager (1.14.2-1) experimental; urgency=medium
+
+  * New upstream version 1.14.2
+  * Rebase patches
+  * Disable obsolete ibft settings plugin.
+    It has been replaced by an iBFT reader which parses /sys/firmware/ibft
+    directly instead of iscsiadm output.
+  * Drop debian/patches/Fix-iscsiadm-path.patch.
+    No longer needed.
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 21 Oct 2018 02:56:25 +0200
+
+network-manager (1.14.0-2) experimental; urgency=medium
+
+  * Tighten inter-package dependencies.
+    Make sure network-manager and libnm0 are always upgraded in lockstep.
+    (Closes: #818165)
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 08 Oct 2018 16:55:10 +0200
+
+network-manager (1.14.0-1) experimental; urgency=medium
+
+  * New upstream version 1.14.0
+  * Rebase patches
+  * Update symbols file for libnm0.
+    The nm_connection_get_setting_{6lowpan,sriov,wpan} API had been
+    introduced during the 1.14 development cycle but as it was duplicating
+    existing functionality it was removed again.
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 15 Sep 2018 10:57:07 +0200
+
+network-manager (1.13.90-1) experimental; urgency=medium
+
+  * New upstream version 1.13.90 (1.14 rc1)
+  * Refresh patches
+  * Update symbols file for libnm0
+  * Bump Standards-Version to 4.2.1
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 08 Sep 2018 18:23:20 +0200
+
 network-manager (1.12.4-1~bpo9+1) stretch-backports; urgency=medium
 
   * Rebuild for stretch-backports (Closes: #880978)
