@@ -1,0 +1,28 @@
+From: Li Song <song.li@honeywell.com>
+Date: Fri, 19 Oct 2018 13:41:51 -0400
+Subject: sd-dhcp: remove unreachable route after rebinding return NAK
+
+(cherry picked from commit cc3981b1272b9ce37e7d734a7b2f42e84acac535)
+(cherry picked from commit 915c2f675a23b2ae16d292d1ac570706f76b384d)
+(cherry picked from commit cb77290a696dce924e2a993690634986ac035490)
+(cherry picked from commit f211b140a5861ddedc2424946e3ab07d3b642b5f)
+(cherry picked from commit 1cfefbb99ff3c2ab7a0f54829c6f3f787d9e6d77)
+(cherry picked from commit f3f5441820d0ecd0ff6861480ace696a6bf34fbd)
+(cherry picked from commit 7337cd21dd1e4a285ff1ae9463b42460a64c3107)
+---
+ src/systemd/src/libsystemd-network/sd-dhcp-client.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/systemd/src/libsystemd-network/sd-dhcp-client.c b/src/systemd/src/libsystemd-network/sd-dhcp-client.c
+index 7809a81..737b142 100644
+--- a/src/systemd/src/libsystemd-network/sd-dhcp-client.c
++++ b/src/systemd/src/libsystemd-network/sd-dhcp-client.c
+@@ -1571,6 +1571,8 @@ static int client_handle_message(sd_dhcp_client *client, DHCPMessage *message, i
+                         client->timeout_resend =
+                                 sd_event_source_unref(client->timeout_resend);
+ 
++                        client_notify(client, SD_DHCP_CLIENT_EVENT_EXPIRED);
++
+                         r = client_initialize(client);
+                         if (r < 0)
+                                 goto error;

@@ -21,3 +21,10 @@ device-separately-handle-NMDevice-s-autoconnect-by-user-a.patch
 device-add-get_autoconnect_allowed-virtual-function.patch
 device-wifi-block-autoconnect-while-scanning-is-in-progre.patch
 libnm-client-proxy-_enabled-and-metered-properties-to-the.patch
+libsystemd-network-ipv4ll-probe-conflict-counter-5361.patch
+systemd-dhcp-fix-assertion-starting-DHCP-client-without-M.patch
+dhcp6-fix-an-off-by-one-error-in-dhcp6_option_parse_domai.patch
+sd-dhcp-lease-fix-memleaks.patch
+sd-dhcp6-make-dhcp6_option_parse_domainname-not-store-emp.patch
+sd-dhcp-remove-unreachable-route-after-rebinding-return-N.patch
+dhcp6-make-sure-we-have-enough-space-for-the-DHCP6-option.patch

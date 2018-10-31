@@ -1,0 +1,47 @@
+From: Jason Reeder <jasonreeder@gmail.com>
+Date: Thu, 16 Feb 2017 04:14:38 -0600
+Subject: libsystemd-network: ipv4ll probe conflict counter (#5361)
+
+A bug exists where the conflict counter is cleared
+regardless of whether or not the next probe attempt leads to
+a successful address acquisition. This causes 'bursts' of
+MAX_CONFLICTS probes followed by a delay of
+RATE_LIMIT_INTERVAL instead of a single probe each
+RATE_LIMIT_INTERVAL when beyond MAX_CONFLICTS.
+
+The conflict counter should only be cleared after an
+address is successfully acquired. This commit achieves that
+goal.
+
+From RFC3927:
+A host should maintain a counter of the number of address
+conflicts it has experienced in the process of trying to
+acquire an address, and if the number of conflicts exceeds
+MAX_CONFLICTS then the host MUST limit the rate at which it
+probes for new addresses to no more than one new address per
+RATE_LIMIT_INTERVAL.  This is to prevent catastrophic ARP
+storms in pathological failure cases, such as a rogue host
+that answers all ARP probes, causing legitimate hosts to go
+into an infinite loop attempting to select a usable address.
+
+Signed-off-by: Jason Reeder <jasonreeder@gmail.com>
+
+(cherry picked from commit 0cbc024d591e1b1095d90494e0337dabd9ef2e19)
+(cherry picked from commit eb8fd9cdfd69028ef22a9d0de32ade9751fcea82)
+---
+ src/systemd/src/libsystemd-network/sd-ipv4acd.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/src/systemd/src/libsystemd-network/sd-ipv4acd.c b/src/systemd/src/libsystemd-network/sd-ipv4acd.c
+index 913c1ad..3976768 100644
+--- a/src/systemd/src/libsystemd-network/sd-ipv4acd.c
++++ b/src/systemd/src/libsystemd-network/sd-ipv4acd.c
+@@ -244,8 +244,6 @@ static int ipv4acd_on_timeout(sd_event_source *s, uint64_t usec, void *userdata)
+                         r = ipv4acd_set_next_wakeup(acd, RATE_LIMIT_INTERVAL_USEC, PROBE_WAIT_USEC);
+                         if (r < 0)
+                                 goto fail;
+-
+-                        acd->n_conflict = 0;
+                 } else {
+                         r = ipv4acd_set_next_wakeup(acd, 0, PROBE_WAIT_USEC);
+                         if (r < 0)

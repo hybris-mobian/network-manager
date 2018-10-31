@@ -1,0 +1,45 @@
+From: Thomas Haller <thaller@redhat.com>
+Date: Mon, 10 Sep 2018 15:22:28 +0200
+Subject: systemd/dhcp: fix assertion starting DHCP client without MAC address
+
+An assertion in dhcp_network_bind_raw_socket() is triggered when
+starting an sd_dhcp_client without setting setting a MAC address
+first.
+
+  - sd_dhcp_client_start()
+    - client_start()
+      - client_start_delayed()
+        - dhcp_network_bind_raw_socket()
+
+In that case, the arp-type and MAC address is still unset. Note that
+dhcp_network_bind_raw_socket() already checks for a valid arp-type
+and MAC address below, so we should just gracefully return -EINVAL.
+
+Maybe sd_dhcp_client_start() should fail earlier when starting without
+MAC address. But the failure here will be correctly propagated and
+the start aborted.
+
+See-also: https://github.com/systemd/systemd/pull/10054
+(cherry picked from commit 34af574d5810ab2b0d6d354cbc28135cde4a55b1)
+(cherry picked from commit 0a797bdc2a592385a21e7ed918c08ef54a346d99)
+(cherry picked from commit f37ed84ca495ee212b1e82b9c5a5682c4acfebcd)
+(cherry picked from commit 1031b2bb5c97bd48ff93f85537b3f5ce0f6f64bf)
+(cherry picked from commit 4ca49f52fae5c7841f873bc0a01d654dc19c2152)
+(cherry picked from commit 59941b21247c53091f303b58106f9b7a446835f1)
+---
+ src/systemd/src/libsystemd-network/dhcp-network.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/src/systemd/src/libsystemd-network/dhcp-network.c b/src/systemd/src/libsystemd-network/dhcp-network.c
+index 7ad0ec3..f0b1b0a 100644
+--- a/src/systemd/src/libsystemd-network/dhcp-network.c
++++ b/src/systemd/src/libsystemd-network/dhcp-network.c
+@@ -142,8 +142,6 @@ int dhcp_network_bind_raw_socket(int ifindex, union sockaddr_union *link,
+         const uint8_t *bcast_addr = NULL;
+         uint8_t dhcp_hlen = 0;
+ 
+-        assert_return(mac_addr_len > 0, -EINVAL);
+-
+         if (arp_type == ARPHRD_ETHER) {
+                 assert_return(mac_addr_len == ETH_ALEN, -EINVAL);
+                 memcpy(&eth_mac, mac_addr, ETH_ALEN);
