@@ -1,3 +1,18 @@
+network-manager (1.6.2-3+deb9u2) stretch; urgency=medium
+
+  * Cherry-pick various fixes for the sd-network based dhcp=internal plugin
+    - Make sure we have enough space for the DHCP6 option header.
+      Fixes out-of-bounds heap write in dhcpv6 option handling.
+      (CVE-2018-15688, LP: #1795921)
+    - Remove unreachable route after rebinding return NAK
+    - Make dhcp6_option_parse_domainname() not store empty domain
+    - Fix memleaks when releasing a dhcp lease
+    - Fix an off-by-one error in dhcp6_option_parse_domainname
+    - Fix assertion starting DHCP client without MAC address
+    - Fix incorrect clearing of ipv4ll probe conflict counter
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 02 Nov 2018 07:13:36 +0100
+
 network-manager (1.6.2-3+deb9u1) stretch; urgency=medium
 
   * libnm: Fix accessing enabled and metered properties.
