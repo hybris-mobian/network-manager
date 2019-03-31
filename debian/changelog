@@ -1,3 +1,34 @@
+network-manager (1.14.6-2) unstable; urgency=medium
+
+  * supplicant: fix setting pmf when the supplicant doesn't advertise support
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 26 Feb 2019 21:23:14 +0100
+
+network-manager (1.14.6-1) unstable; urgency=medium
+
+  * New upstream version 1.14.6
+  * Use debhelper-compat (= 12) Build-Depends and drop debian/compat
+  * Rebase patches
+  * Do not manage Docker bridge interfaces (Closes: #875127)
+  * Bump Standards-Version to 4.3.0
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 26 Feb 2019 19:33:53 +0100
+
+network-manager (1.14.4-4) unstable; urgency=medium
+
+  * Move D-Bus policy files to /usr/share/dbus-1/system.d/
+  * Remove obsolete D-Bus policy conffiles on upgrades
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 27 Nov 2018 01:35:50 +0100
+
+network-manager (1.14.4-3) unstable; urgency=medium
+
+  * cli: wait for all wifi scans to finish before displaying the result.
+    Otherwise devices are displayed in an inconsistent order.
+    Replaces debian/patches/Ignore-client-tests-failures.patch.
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 05 Nov 2018 16:05:51 +0100
+
 network-manager (1.14.4-2~bpo9+1) stretch-backports; urgency=medium
 
   * Rebuild for stretch-backports
