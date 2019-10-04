@@ -1,3 +1,18 @@
+network-manager (1.14.6-2+deb10u1) stable; urgency=medium
+
+  * core: fix file permissions for "/var/lib/NetworkManager/secret_key"
+    Patch cherry-picked from upstream.
+  * Fix permissions of /var/lib/NetworkManager/secret_key on upgrades.
+    The file mode is supposed to be 0600. (Closes: #941609)
+  * Install directories as created by upstream build system.
+    Drop network-manager.dirs and instead use the directories created by the
+    upstream build system. Fix permissions of /var/lib/NetworkManager to be
+    0700 as it contains possibly sensitive data and should not be
+    world-readable.
+  * d/gbp.conf: Set debian-branch to buster
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 04 Oct 2019 15:03:20 +0200
+
 network-manager (1.14.6-2) unstable; urgency=medium
 
   * supplicant: fix setting pmf when the supplicant doesn't advertise support
