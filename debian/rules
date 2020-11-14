@@ -54,6 +54,7 @@ override_dh_auto_configure:
 		--enable-json-validation \
 		--enable-bluez5-dun \
 		--enable-vala \
+		--enable-ofono \
 		--disable-more-warnings \
 		--disable-modify-system \
 		--disable-ovs
